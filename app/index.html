@@ -1,0 +1,109 @@
+---
+title: 首頁
+layout: ./app/layout.ejs
+engine: ejs
+current: index
+---
+  <div class="main rounded">
+    <div class="button-group d-flex justify-content-center">
+      <button data-type="N04" type="button" class="vegetablesBtn btn btn-type border-dark border-2">蔬果</button>
+      <button data-type="N05" type="button" class="fruitsBtn btn btn-type border-dark border-2">水果</button>
+      <button data-type="N06" type="button" class="flowersBtn btn btn-type border-dark border-2">花卉</button>
+    </div>
+
+    <div class="seach-group d-flex  flex-column flex-md-row  justify-content-center">
+      <div class="crop-input d-flex jus mb-2">
+        <label class="rounded-start text-white px-2 py-3" for="crop">作物名稱</label>
+        <input class="rounded-end text-center" type="text" placeholder="請輸入作物名稱" id="crop" name="crop">
+      </div>
+      <button type="button" class="search text-white btn mb-2 ms-2">搜尋</button>
+    </div>
+
+    <div class="sort-content d-flex justify-content-md-between justify-content-center">
+      <p id="js-crop-name" class="show-result fw-bold"></p>
+
+      <select id="js-select" class="sort-select border-secondary d-none d-md-block rounded p-2 pe-4">
+        <option>排序篩選</option>
+        <option>依上價排序</option>
+        <option>依中價排序</option>
+        <option>依下價排序</option>
+        <option>依平均價排序</option>
+        <option>依交易量排序</option>
+      </select>
+    </div>
+    <div class ="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table-responsive table-hover market table me-4">
+      <thead class="table-title js-sort-advanced">
+        <tr>
+          <th width="15%">作物名稱</th>
+          <th width="15%">市場名稱</th>
+          <th  width="14%">
+            <div class="inline-flex sort-advanced">上價
+              <span>
+                <i data-price="上價" data-sort="up" class="fas fa-caret-up"></i>
+                
+                <i data-price="上價" data-sort="down" class="fas fa-caret-down"></i>
+              </span>
+            </div>
+          </th>
+          <th width="14%">
+            <div class="inline-flex sort-advanced">中價
+              <span>
+                <i data-price="中價" data-sort="up" class="fas fa-caret-up"></i>
+                
+                <i data-price="中價" data-sort="down" class="fas fa-caret-down"></i>
+              </span>
+            </div>
+          </th>
+          <th width="14%">
+            <div class="inline-flex sort-advanced">下價
+              <span>
+                <i data-price="下價" data-sort="up" class="fas fa-caret-up"></i>
+                
+                <i data-price="下價" data-sort="down" class="fas fa-caret-down"></i>
+              </span>
+            </div>
+          </th>
+          <th width="14%">
+            <div class="inline-flex sort-advanced">平均價
+              <span>
+              <i data-price="平均價" data-sort="up" class="fas fa-caret-up"></i>
+                
+                <i data-price="平均價" data-sort="down" class="fas fa-caret-down"></i>
+              </span>
+            </div>
+          </th>
+          <th width="14%">
+            <div class="inline-flex sort-advanced">交易量
+              <span>
+              <i data-price="交易量" data-sort="up" class="fas fa-caret-up"></i>
+                
+                <i data-price="交易量" data-sort="down" class="fas fa-caret-down"></i>
+              </span>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="showList">
+        <tr>
+          <td colspan="6" class="text-center p-3">請輸入並搜尋想比價的作物名稱^＿^</td>
+          <!--           <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td> -->
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <select id="js-moblie-select" class="mobile-select border-2 border-secondary d-block d-md-none rounded-pill pt-1 pb-1 position-fixed end-0 bottom-0  ps-2 pe-3">
+    <option>排序</option>
+    <option>上價</option>
+    <option>中價</option>
+    <option>下價</option>
+    <option>平均價</option>
+    <option>交易量</option>
+  </select>
+
