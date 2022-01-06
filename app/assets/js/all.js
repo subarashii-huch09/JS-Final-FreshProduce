@@ -143,7 +143,6 @@ function selectChange(value) {
       return b[value] - a[value];
     });
   
-  
   renderData(filterData)
 }
 
