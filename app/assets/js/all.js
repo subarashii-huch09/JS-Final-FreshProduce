@@ -136,12 +136,15 @@ select.addEventListener("change", function(e){
   }
 });
 
-function selectChange(value) {
-    data.sort((a,b) => {
-    return b[value] - a[value];
-  });
 
-  renderData(data);
+function selectChange(value) {
+  
+  filterData.sort((a, b) => {
+      return b[value] - a[value];
+    });
+  
+  
+  renderData(filterData)
 }
 
 //步驟五：進階排序資料
