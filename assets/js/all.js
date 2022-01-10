@@ -43,26 +43,25 @@ buttonGroup.addEventListener("click", function (e) {
       return item.classList.remove("active");
     });
     var type = e.target.dataset.type;
-    var _filterData = [];
 
     if (type === "N04") {
-      _filterData = data.filter(function (item) {
+      filterData = data.filter(function (item) {
         return item.種類代碼 === "N04";
       });
       e.target.classList.add("active");
     } else if (type === "N05") {
-      _filterData = data.filter(function (item) {
+      filterData = data.filter(function (item) {
         return item.種類代碼 === "N05";
       });
       e.target.classList.add("active");
     } else if (type === "N06") {
-      _filterData = data.filter(function (item) {
+      filterData = data.filter(function (item) {
         return item.種類代碼 === "N06";
       });
       e.target.classList.add("active");
     }
 
-    renderData(_filterData);
+    renderData(filterData);
   }
 }); // 步驟三： 搜尋資料
 
@@ -77,23 +76,27 @@ search.addEventListener("click", function (e) {
       return;
     }
 
-    var _filterData2 = [];
-    _filterData2 = data.filter(function (item) {
+    filterData = data.filter(function (item) {
       return item.作物名稱.match(keyword);
     });
 
-    if (_filterData2.length === 0) {
+    if (filterData.length === 0) {
       showList.innerHTML = "\n      <tr><td colspan=\"6\" class=\"text-center p-3\">\u67E5\u8A62\u4E0D\u5230\u4EA4\u6613\u8CC7\u8A0AQQ</td></tr>";
     } else {
-      renderData(_filterData2);
+      renderData(filterData);
       keyword = "";
     }
   }
 }); //步驟四：排序資料
 
 var select = document.querySelector("#js-select");
-select.addEventListener("change", function (e) {
-  switch (select.value) {
+var mobileSelect = document.querySelector("#js-mobile-select");
+select.addEventListener("change", selectCategory); // mobileSelect.addEventListener("change", selectCategory);
+// select = e.target.value;
+// mobileSelect = e.target.value;
+
+function selectCategory(e) {
+  switch (e.target.value) {
     case "依上價排序":
       selectChange("上價");
       break;
@@ -117,7 +120,7 @@ select.addEventListener("change", function (e) {
     default:
       break;
   }
-});
+}
 
 function selectChange(value) {
   filterData.sort(function (a, b) {
@@ -125,4 +128,25 @@ function selectChange(value) {
   });
   renderData(filterData);
 } //步驟五：進階排序資料
+
+
+var sortAdvanced = document.querySelector(".js-sort-advanced");
+sortAdvanced.addEventListener("click", function (e) {
+  if (e.target.nodeName === "I") {
+    var sortPrice = e.target.dataset.price;
+    var sortCaret = e.target.dataset.sort;
+
+    if (sortCaret === "up") {
+      filterData.sort(function (a, b) {
+        return b[sortPrice] - a[sortPrice];
+      });
+    } else {
+      filterData.sort(function (a, b) {
+        return a[sortPrice] - b[sortPrice];
+      });
+    }
+
+    renderData(filterData);
+  }
+});
 //# sourceMappingURL=all.js.map
