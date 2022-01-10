@@ -59,8 +59,7 @@ buttonGroup.addEventListener("click", function(e){
     tabs.forEach(item => item.classList.remove("active"))
 
     let type = e.target.dataset.type
-    let filterData = [];
-
+    
     if (type === "N04"){
       filterData = data.filter((item)=>item.種類代碼 === "N04")
       e.target.classList.add("active")
@@ -97,7 +96,7 @@ search.addEventListener("click",function(e){
       return
     }  
 
-    let filterData = [];
+    
     filterData = data.filter((item) => {return item.作物名稱.match(keyword)});
       
     
@@ -113,9 +112,16 @@ search.addEventListener("click",function(e){
 
 //步驟四：排序資料
 const select = document.querySelector("#js-select")
+const mobileSelect = document.querySelector("#js-mobile-select");
 
-select.addEventListener("change", function(e){
-  switch (select.value) {
+select.addEventListener("change", selectCategory);
+// mobileSelect.addEventListener("change", selectCategory);
+
+// select = e.target.value;
+// mobileSelect = e.target.value;
+
+function selectCategory(e){
+  switch (e.target.value) {
     case "依上價排序":
       selectChange("上價");
       break;
@@ -134,8 +140,7 @@ select.addEventListener("change", function(e){
     default:
       break
   }
-});
-
+}
 
 function selectChange(value) {
   
@@ -146,5 +151,27 @@ function selectChange(value) {
   renderData(filterData)
 }
 
-//步驟五：進階排序資料
 
+
+
+//步驟五：進階排序資料
+const sortAdvanced = document.querySelector(".js-sort-advanced");
+
+sortAdvanced.addEventListener("click", function(e){
+  if (e.target.nodeName === "I"){
+    const sortPrice = e.target.dataset.price
+    const sortCaret = e.target.dataset.sort
+
+    if (sortCaret === "up"){
+      filterData.sort((a,b)=> {
+        return b[sortPrice]-a[sortPrice]
+      })
+    } else {
+      filterData.sort((a,b)=> {
+        return a[sortPrice]-b[sortPrice]
+      })
+    }
+
+    renderData(filterData)
+  }
+});
